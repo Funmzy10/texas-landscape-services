@@ -40,20 +40,20 @@ export function WorkGallery() {
       </div>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
         {shown.map((project, index) => {
-          const wide = index % 5 === 0;
+          const featured = filter === "all" && index === 0;
           return (
             <button
               key={project.slug}
               type="button"
               onClick={() => setActive(project)}
-              className={`group text-left ${wide ? "lg:col-span-7" : "lg:col-span-5"}`}
+              className={`group text-left ${featured ? "sm:col-span-2 lg:col-span-12" : "lg:col-span-4"}`}
             >
-              <span className="relative block aspect-[4/5] overflow-hidden bg-moss">
+              <span className={`relative block overflow-hidden bg-moss ${featured ? "aspect-[4/5] sm:aspect-[16/9]" : "aspect-[4/5]"}`}>
                 <Image
                   src={project.image}
                   alt={project.alt}
                   fill
-                  sizes={wide ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 40vw, 100vw"}
+                  sizes={featured ? "(min-width: 1024px) 1100px, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
                   className="object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
               </span>

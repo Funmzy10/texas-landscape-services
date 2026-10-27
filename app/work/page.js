@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { WorkGallery } from "@/components/WorkGallery";
-import { Compare } from "@/components/Compare";
+import { business } from "@/lib/data";
 
 export const metadata = {
   title: "Work",
@@ -9,22 +10,24 @@ export const metadata = {
 
 export default function WorkPage() {
   return (
-    <main className="mx-auto max-w-page px-5 py-12">
+    <main className="mx-auto max-w-page px-5 py-12 md:py-16">
       <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">Portfolio</p>
-      <h1 className="mt-3 max-w-2xl font-serif text-5xl leading-none">The grounds, as photographed.</h1>
+      <h1 className="mt-3 max-w-2xl font-serif text-5xl leading-[0.95]">The grounds, as photographed.</h1>
       <p className="mt-4 max-w-xl text-sm leading-6 text-mute">
-        Documented on-site across North Texas estates and commercial grounds. Open a photograph for what it actually shows, then ask for a quote on similar work.
+        Documented on-site across North Texas estates and commercial grounds. Open a photograph, then ask for a quote on similar work.
       </p>
       <div className="mt-10">
         <WorkGallery />
       </div>
-      <div className="mt-16 max-w-4xl">
-        <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">Two finishes</p>
-        <h2 className="mt-2 font-serif text-3xl">Drag to compare two real properties.</h2>
-        <div className="mt-6">
-          <Compare />
-        </div>
+      <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8">
+        <p className="font-serif text-3xl">Want this standard on your property?</p>
+        <Link href="/contact#estimate" className="inline-flex h-12 items-center bg-moss px-5 text-sm text-paper">
+          Request a quote
+        </Link>
       </div>
+      <p className="mt-4 text-sm text-mute">
+        Or call <a href={business.phoneHref}>{business.phone}</a>
+      </p>
     </main>
   );
 }
