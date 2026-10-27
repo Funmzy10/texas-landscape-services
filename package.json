@@ -1,0 +1,8 @@
+{
+  "name": "texas-landscape-services",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}
