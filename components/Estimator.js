@@ -61,23 +61,22 @@ export function Estimator() {
     if (form.company) return;
     setStatus("sending");
     try {
-      const response = await fetch("https://formsubmit.co/ajax/info@txlandscapeservices.com", {
+      const response = await fetch("/api/estimate", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           name: form.name,
           phone: form.phone,
-          email: form.email || "not provided",
+          email: form.email,
           property: form.property,
           services: form.services.join(", "),
           place: form.place,
           notes: form.notes,
-          _subject: "Estimate request — Texas Landscape Services",
-          _template: "table",
+          company: form.company,
         }),
       });
       const data = await response.json().catch(() => ({}));
-      if (!response.ok || data.success === "false") {
+      if (!response.ok || !data.ok) {
         setStatus("error");
         setError("The note did not send. Call (469) 455-9733 or email info@txlandscapeservices.com.");
         return;

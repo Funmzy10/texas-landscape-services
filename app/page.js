@@ -52,33 +52,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-page px-5 py-16 md:py-20">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+      <section>
+        <div className="flex flex-wrap items-end justify-between gap-4 px-5 pt-14 md:mx-auto md:max-w-page md:pt-20">
           <div>
             <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">Selected work</p>
             <h2 className="mt-2 max-w-xl font-serif text-4xl leading-tight">Estates, color, and commercial turf.</h2>
           </div>
           <Link href="/work" className="text-sm underline-offset-4 hover:underline">All projects</Link>
         </div>
-        <div className="mt-8 grid gap-6 md:grid-cols-12">
-          <Link href="/work" className="group md:col-span-7">
-            <span className="relative block aspect-[4/5] overflow-hidden bg-moss">
-              <Image src={lead.image} alt={lead.alt} fill className="object-cover transition duration-700 group-hover:scale-[1.03]" sizes="(min-width: 768px) 55vw, 100vw" />
-            </span>
-            <span className="mt-3 block text-[0.68rem] uppercase tracking-[0.16em] text-brass">{lead.badge}</span>
+        <Link href="/work" className="group relative mt-6 block min-h-[78vh]">
+          <Image src={lead.image} alt={lead.alt} fill className="object-cover transition duration-700 group-hover:scale-[1.02]" sizes="100vw" />
+          <span className="absolute bottom-0 left-0 max-w-md bg-paper px-5 py-4">
+            <span className="block text-[0.68rem] uppercase tracking-[0.16em] text-brass">{lead.badge}</span>
             <span className="mt-1 block font-serif text-3xl leading-tight">{lead.title}</span>
-          </Link>
-          <div className="grid content-start gap-6 md:col-span-5">
-            {rest.map((project) => (
-              <Link key={project.slug} href="/work" className="group">
-                <span className="relative block aspect-[16/10] overflow-hidden bg-moss">
-                  <Image src={project.image} alt={project.alt} fill className="object-cover transition duration-700 group-hover:scale-[1.03]" sizes="(min-width: 768px) 40vw, 100vw" />
-                </span>
-                <span className="mt-2 block text-[0.68rem] uppercase tracking-[0.14em] text-brass">{project.badge}</span>
+          </span>
+        </Link>
+        <div className="grid md:grid-cols-3">
+          {rest.map((project) => (
+            <Link key={project.slug} href="/work" className="group relative block aspect-[3/4] min-h-[70vw] md:min-h-[46vw]">
+              <Image src={project.image} alt={project.alt} fill className="object-cover transition duration-700 group-hover:scale-[1.03]" sizes="(min-width: 768px) 33vw, 100vw" />
+              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent p-4 text-paper">
+                <span className="block text-[0.68rem] uppercase tracking-[0.14em] text-paper/80">{project.badge}</span>
                 <span className="mt-1 block font-serif text-2xl leading-tight">{project.title}</span>
-              </Link>
-            ))}
-          </div>
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -128,6 +126,7 @@ export default function HomePage() {
             <div>
               <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">Yelp</p>
               <h2 className="mt-2 font-serif text-4xl">{business.yelpScore} from {business.yelpCount} reviews</h2>
+              <p className="mt-3 max-w-md text-sm leading-6 text-mute">Taken from the Pilot Point Yelp profile. One of the five, Jeff R. in June 2023, says a large project was left unfinished.</p>
             </div>
             <a href={business.yelp} className="text-sm underline-offset-4 hover:underline">Read the Yelp profile</a>
           </div>

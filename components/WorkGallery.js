@@ -38,35 +38,32 @@ export function WorkGallery() {
           </button>
         ))}
       </div>
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
-        {shown.map((project, index) => {
-          const featured = filter === "all" && index === 0;
-          return (
-            <button
-              key={project.slug}
-              type="button"
-              onClick={() => setActive(project)}
-              className={`group text-left ${featured ? "sm:col-span-2 lg:col-span-12" : "lg:col-span-4"}`}
-            >
-              <span className={`relative block overflow-hidden bg-moss ${featured ? "aspect-[4/5] sm:aspect-[16/9]" : "aspect-[4/5]"}`}>
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  fill
-                  sizes={featured ? "(min-width: 1024px) 1100px, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
-                  className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                />
+      <div className="mt-8 flex flex-col">
+        {shown.map((project) => (
+          <button
+            key={project.slug}
+            type="button"
+            onClick={() => setActive(project)}
+            className="group border-t border-line py-8 text-left first:border-t-0 first:pt-0"
+          >
+            <span className="relative left-1/2 block aspect-[3/4] w-screen -translate-x-1/2 overflow-hidden bg-moss sm:aspect-[16/10] sm:max-h-[88vh]">
+              <Image
+                src={project.image}
+                alt={project.alt}
+                fill
+                sizes="100vw"
+                className="object-cover transition duration-700 group-hover:scale-[1.02]"
+              />
+            </span>
+            <span className="mt-4 flex items-end justify-between gap-4">
+              <span>
+                <span className="block text-[0.68rem] uppercase tracking-[0.16em] text-brass">{project.badge}</span>
+                <span className="mt-1 block font-serif text-3xl leading-tight sm:text-4xl">{project.title}</span>
               </span>
-              <span className="mt-3 flex items-start justify-between gap-3">
-                <span>
-                  <span className="block text-[0.68rem] uppercase tracking-[0.16em] text-brass">{project.badge}</span>
-                  <span className="mt-1 block font-serif text-2xl leading-tight">{project.title}</span>
-                </span>
-                <span className="pt-1 text-xs uppercase tracking-[0.14em] text-mute">View</span>
-              </span>
-            </button>
-          );
-        })}
+              <span className="pb-1 text-xs uppercase tracking-[0.14em] text-mute">View</span>
+            </span>
+          </button>
+        ))}
       </div>
       {active ? (
         <div className="fixed inset-0 z-[60] flex justify-end bg-ink/40" onClick={() => setActive(null)}>

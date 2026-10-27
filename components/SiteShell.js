@@ -40,9 +40,16 @@ export function SiteShell({ children }) {
       </a>
       <header className="sticky top-0 z-40 border-b border-line bg-paper">
         <div className="mx-auto flex h-[72px] max-w-page items-center justify-between gap-4 px-5">
-          <Link href="/" className="leading-none">
-            <span className="block font-serif text-[1.15rem] tracking-tight">Texas Landscape</span>
-            <span className="mt-1 block text-[0.68rem] uppercase tracking-[0.22em] text-mute">Services</span>
+          <Link href="/" className="flex items-center gap-3 leading-none text-ink">
+            <svg viewBox="0 0 36 36" className="h-9 w-9 shrink-0" aria-hidden="true">
+              <rect x="0.75" y="0.75" width="34.5" height="34.5" fill="none" stroke="currentColor" strokeWidth="1" />
+              <path d="M8 28V17M14 28V10M20 28V15M26 28V12" fill="none" stroke="currentColor" strokeWidth="1.25" />
+              <path d="M6 28h24" fill="none" stroke="currentColor" strokeWidth="1.25" />
+            </svg>
+            <span>
+              <span className="block font-serif text-[1.05rem] tracking-tight sm:text-[1.2rem]">Texas Landscape</span>
+              <span className="mt-1 block text-[0.62rem] uppercase tracking-[0.28em] text-mute">Services</span>
+            </span>
           </Link>
           <nav className="hidden items-center gap-7 text-sm md:flex" aria-label="Primary">
             {links.map((link) => (
