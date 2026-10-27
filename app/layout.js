@@ -19,7 +19,7 @@ export const metadata = {
     title: "Texas Landscape Services",
     description: "Commercial grounds and private estate landscape management across North Dallas–Fort Worth.",
     url: siteUrl,
-    images: [{ url: "/media/lawn-sweep.jpg", width: 581, height: 720, alt: "A sweeping maintained lawn and mixed border." }],
+    images: [{ url: "/media/commercial-turf.jpg", width: 1500, height: 1263, alt: "A wide mowed lawn in front of a retail center with a brick monument sign." }],
     type: "website",
   },
 };

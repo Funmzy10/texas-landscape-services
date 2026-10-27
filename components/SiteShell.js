@@ -56,7 +56,8 @@ export function SiteShell({ children }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={path.startsWith(link.href) ? "text-ink" : "text-mute hover:text-ink"}
+                className={path.startsWith(link.href) ? "border-b border-ink text-ink" : "border-b border-transparent text-mute hover:text-ink"}
+                aria-current={path.startsWith(link.href) ? "page" : undefined}
               >
                 {link.label}
               </Link>
@@ -101,7 +102,7 @@ export function SiteShell({ children }) {
             <p className="mt-3 max-w-xs text-sm leading-6 text-paper/75">{business.tagline}</p>
           </div>
           <div className="text-sm leading-6">
-            <p className="text-[0.68rem] uppercase tracking-[0.18em] text-paper/60">Yard and mail</p>
+            <p className="text-[0.68rem] uppercase tracking-[0.18em] text-paper/80">Yard and mail</p>
             <p className="mt-3">
               {business.street}
               <br />
@@ -110,7 +111,7 @@ export function SiteShell({ children }) {
             <p className="mt-2 text-paper/70">{business.mail}</p>
           </div>
           <div className="text-sm leading-6">
-            <p className="text-[0.68rem] uppercase tracking-[0.18em] text-paper/60">Office</p>
+            <p className="text-[0.68rem] uppercase tracking-[0.18em] text-paper/80">Office</p>
             <p className="mt-3">
               <a href={business.phoneHref} className="underline underline-offset-4">
                 {business.phone}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ServiceMap } from "@/components/ServiceMap";
 import { reviews, business, projects, services } from "@/lib/data";
 
-const featuredSlugs = ["estate-entry", "color-bed", "commercial-turf", "stone-terrace"];
+const featuredSlugs = ["estate-entry", "commercial-turf", "color-bed", "stone-terrace", "sweeping-lawn", "entry-border"];
 
 const steps = [
   ["01", "Tell us about your property", "Share the location, the kind of property, and the landscaping you need."],
@@ -37,7 +37,7 @@ export default function HomePage() {
           <p className="mt-5 text-sm text-mute">
             {business.hours}
             {" · "}
-            <a className="text-ink underline-offset-4 hover:underline" href={business.phoneHref}>
+            <a className="text-ink underline underline-offset-4" href={business.phoneHref}>
               {business.phone}
             </a>
           </p>
@@ -48,7 +48,7 @@ export default function HomePage() {
             alt="Yellow and cream flowers in a bed in front of a black iron fence and a stone estate entrance."
             fill
             priority
-            className="object-cover object-[center_35%]"
+            className="object-cover object-center"
             sizes="(min-width: 1024px) 560px, 100vw"
           />
         </div>
@@ -81,28 +81,20 @@ export default function HomePage() {
             All projects
           </Link>
         </div>
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((project, index) => (
-            <Link
-              key={project.slug}
-              href="/work"
-              className={`group ${index === 0 ? "sm:col-span-2" : ""}`}
-            >
-              <span
-                className={`relative block overflow-hidden bg-moss ${
-                  index === 0 ? "aspect-[4/3] sm:aspect-[16/10]" : "aspect-[4/3]"
-                }`}
-              >
+        <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((project) => (
+            <Link key={project.slug} href="/work" className="group">
+              <span className="relative block aspect-[4/3] overflow-hidden bg-moss">
                 <Image
                   src={project.image}
                   alt={project.alt}
                   fill
-                  className="object-cover transition duration-700 group-hover:scale-[1.02]"
-                  sizes={index === 0 ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
+                  className="object-cover object-center transition duration-300 group-hover:scale-[1.02]"
+                  sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
                 />
               </span>
               <span className="mt-2 block text-[0.68rem] uppercase tracking-[0.14em] text-brass">{project.badge}</span>
-              <span className="mt-1 block font-serif text-2xl leading-tight">{project.title}</span>
+              <span className="mt-1 block font-serif text-lg leading-snug">{project.title}</span>
             </Link>
           ))}
         </div>
@@ -115,10 +107,12 @@ export default function HomePage() {
           <ul className="mt-6 divide-y divide-line border-y border-line">
             {services.map((service) => (
               <li key={service.slug}>
-                <Link href={`/services/${service.slug}`} className="grid gap-1 py-3.5 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] sm:items-baseline sm:gap-6">
+                <Link href={`/services/${service.slug}`} className="grid gap-1 py-4 sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] sm:items-baseline sm:gap-8">
                   <strong className="font-serif text-xl font-medium sm:text-2xl">{service.title}</strong>
-                  <span className="text-sm leading-6 text-mute">{service.summary}</span>
-                  <span className="text-sm underline underline-offset-4 sm:col-start-2">Service details</span>
+                  <span className="text-sm leading-6 text-mute">
+                    {service.summary}{" "}
+                    <span className="whitespace-nowrap text-ink underline underline-offset-4">Details</span>
+                  </span>
                 </Link>
               </li>
             ))}
@@ -133,7 +127,7 @@ export default function HomePage() {
           {steps.map(([number, title, copy], index) => (
             <li key={number} className="relative grid grid-cols-[2rem_1fr] gap-x-4 md:block">
               {index < steps.length - 1 ? (
-                <span className="absolute left-8 top-4 hidden h-px w-[calc(100%-0.75rem)] bg-line md:block" aria-hidden="true" />
+                <span className="absolute left-8 top-4 hidden h-px w-full bg-line md:block" aria-hidden="true" />
               ) : null}
               {index < steps.length - 1 ? (
                 <span className="absolute bottom-[-2rem] left-4 top-8 w-px bg-line md:hidden" aria-hidden="true" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { X } from "lucide-react";
@@ -9,26 +9,32 @@ import { filters, projects } from "@/lib/data";
 export function WorkGallery() {
   const [filter, setFilter] = useState("all");
   const [active, setActive] = useState(null);
+  const closeRef = useRef(null);
   const shown = filter === "all" ? projects : projects.filter((item) => item.filter === filter);
 
   useEffect(() => {
     if (!active) return undefined;
+    closeRef.current?.focus();
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const onKey = (event) => {
       if (event.key === "Escape") setActive(null);
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+    };
   }, [active]);
 
   return (
     <>
-      <div className="flex w-full max-w-full gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Project types">
+      <div className="flex w-full max-w-full gap-2 overflow-x-auto pb-2" role="group" aria-label="Project types">
         {filters.map((item) => (
           <button
             key={item.id}
             type="button"
-            role="tab"
-            aria-selected={filter === item.id}
+            aria-pressed={filter === item.id}
             onClick={() => setFilter(item.id)}
             className={`shrink-0 border px-4 py-2 text-sm ${
               filter === item.id ? "border-moss bg-moss text-paper" : "border-line bg-paper text-ink"
@@ -38,7 +44,7 @@ export function WorkGallery() {
           </button>
         ))}
       </div>
-      <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((project) => (
           <button key={project.slug} type="button" onClick={() => setActive(project)} className="group text-left">
             <span className="relative block aspect-[4/3] overflow-hidden bg-moss">
@@ -47,11 +53,11 @@ export function WorkGallery() {
                 alt={project.alt}
                 fill
                 sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition duration-700 group-hover:scale-[1.02]"
+                className="object-cover object-center transition duration-300 group-hover:scale-[1.02]"
               />
             </span>
             <span className="mt-3 block text-[0.68rem] uppercase tracking-[0.16em] text-brass">{project.badge}</span>
-            <span className="mt-1 block font-serif text-2xl leading-tight">{project.title}</span>
+            <span className="mt-2 block font-serif text-xl leading-snug">{project.title}</span>
           </button>
         ))}
       </div>
@@ -66,7 +72,7 @@ export function WorkGallery() {
           >
             <div className="flex items-start justify-between gap-4">
               <p className="text-[0.68rem] uppercase tracking-[0.16em] text-brass">{active.badge}</p>
-              <button type="button" onClick={() => setActive(null)} className="border border-line p-2" aria-label="Close">
+              <button ref={closeRef} type="button" onClick={() => setActive(null)} className="border border-line p-2" aria-label="Close project details">
                 <X size={16} />
               </button>
             </div>

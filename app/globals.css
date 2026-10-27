@@ -24,6 +24,11 @@ body {
   outline-offset: 3px;
 }
 
+a.bg-moss:hover,
+button.bg-moss:hover {
+  background-color: #274536;
+}
+
 p a:not([class*="inline-flex"]),
 figcaption a:not([class*="inline-flex"]) {
   text-decoration-line: underline;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { business, estimateServices, propertyTypes } from "@/lib/data";
 
@@ -22,6 +22,7 @@ export function Estimator() {
   const [form, setForm] = useState({ ...empty, notes: preset ? `Interested in similar work: ${preset}` : "" });
   const [error, setError] = useState("");
   const [status, setStatus] = useState("idle");
+  const lock = useRef(false);
 
   const progress = useMemo(() => ["Property", "Services", "Details"][step], [step]);
 
@@ -63,6 +64,8 @@ export function Estimator() {
       return;
     }
     if (form.company) return;
+    if (lock.current) return;
+    lock.current = true;
     setStatus("sending");
     try {
       const response = await fetch("https://formsubmit.co/ajax/info@txlandscapeservices.com", {
@@ -84,6 +87,7 @@ export function Estimator() {
       const data = await response.json().catch(() => ({}));
       const accepted = response.ok && (data.success === true || data.success === "true");
       if (!accepted) {
+        lock.current = false;
         setStatus("error");
         const message = String(data.message || "");
         setError(
@@ -95,6 +99,7 @@ export function Estimator() {
       }
       setStatus("sent");
     } catch {
+      lock.current = false;
       setStatus("error");
       setError(`The note did not send. Call ${business.phone} or email ${business.email}.`);
     }
@@ -181,7 +186,11 @@ export function Estimator() {
           </label>
         </div>
       ) : null}
-      {error ? <p className="mt-4 text-sm text-red-800">{error}</p> : null}
+      {error ? (
+        <p role="alert" className="mt-4 text-sm text-red-800">
+          {error}
+        </p>
+      ) : null}
       <div className="mt-6 flex gap-3">
         {step > 0 ? (
           <button type="button" onClick={() => setStep(step - 1)} className="h-12 border border-ink/20 px-5 text-sm">

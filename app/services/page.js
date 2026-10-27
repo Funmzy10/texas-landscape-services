@@ -15,12 +15,12 @@ export default function ServicesPage() {
       <h1 className="mt-3 max-w-2xl font-serif text-4xl leading-none sm:text-5xl">Care matched to the property.</h1>
       <div className="mt-8 grid gap-8">
         {services.map((service) => (
-          <article key={service.slug} className="grid items-center gap-4 border-t border-line pt-6 md:grid-cols-[minmax(0,280px)_1fr] md:gap-6">
-            <div className="relative aspect-[4/3] max-w-sm">
-              <Image src={service.image} alt={service.alt} fill className="object-cover" sizes="(min-width: 768px) 280px, 100vw" />
+          <article key={service.slug} className="grid grid-cols-[7.25rem_1fr] items-start gap-4 border-t border-line pt-5 sm:grid-cols-[11rem_1fr] md:grid-cols-[15rem_1fr] md:items-center md:pt-6">
+            <div className="relative aspect-[4/3]">
+              <Image src={service.image} alt={service.alt} fill className="object-cover object-center" sizes="(min-width: 768px) 240px, 176px" />
             </div>
             <div>
-              <h2 className="font-serif text-3xl">{service.title}</h2>
+              <h2 className="font-serif text-xl leading-tight sm:text-2xl md:text-3xl">{service.title}</h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-mute">{service.summary}</p>
               <p className="mt-3 text-sm">
                 <span className="text-brass">For </span>
