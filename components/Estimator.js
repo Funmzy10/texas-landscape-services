@@ -89,10 +89,6 @@ export function Estimator() {
         );
         return;
       }
-        setStatus("error");
-        setError("The note did not send. Call (469) 455-9733 or email info@txlandscapeservices.com.");
-        return;
-      }
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -105,8 +101,7 @@ export function Estimator() {
       <div className="border border-line bg-white p-6">
         <p className="font-serif text-3xl">Request received.</p>
         <p className="mt-3 text-sm leading-6 text-mute">
-          The office inbox at info@txlandscapeservices.com has the details. The first time this form is used, FormSubmit
-          asks that inbox to confirm delivery. If you need a person now, call (469) 455-9733.
+          FormSubmit accepted this request for info@txlandscapeservices.com. If you need a person now, call (469) 455-9733.
         </p>
       </div>
     );
