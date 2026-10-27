@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://texas-landscape-services.vercel.app/sitemap.xml
