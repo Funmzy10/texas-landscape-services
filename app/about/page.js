@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { business } from "@/lib/data";
 
 export const metadata = {
   title: "About",
-  description: "Texas Landscape Services is based at 10841 FM 1385 in Pilot Point and works across North Dallas–Fort Worth.",
+  description: "Texas Landscape Services is based at 10841 FM 1385 in Pilot Point and works with commercial sites and private estates in North Texas.",
   alternates: { canonical: "/about" },
 };
 
@@ -10,17 +11,25 @@ export default function AboutPage() {
   return (
     <main className="mx-auto max-w-page px-5 py-12">
       <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">Company</p>
-      <h1 className="mt-3 max-w-3xl font-serif text-5xl leading-none">A Pilot Point grounds company for commercial sites and private estates.</h1>
+      <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-tight sm:text-5xl sm:leading-none">A Pilot Point crew for commercial grounds and private estates.</h1>
       <div className="mt-8 grid gap-10 md:grid-cols-[1.3fr_0.7fr]">
         <div className="space-y-4 text-sm leading-7 text-mute">
           <p>
-            Texas Landscape Services manages commercial grounds and private estate landscapes. The public listing covers maintenance, seasonal planting, renovation, irrigation, and pressure washing.
+            If you manage a building, the useful question is whether someone will keep the exterior to a standard you can describe. If you own the home, it is whether the lawn, the beds, and the seasonal color will be looked after without you chasing the next visit.
           </p>
           <p>
-            Design for renovations and enhancements is done in house. Larger design work is coordinated with landscape architects. This is not a standalone architecture practice.
+            Texas Landscape Services does that work from the yard at {business.street}, {business.city}. The public listing covers maintenance, seasonal planting, renovation, irrigation, and pressure washing.
           </p>
           <p>
-            Serving regular maintenance routes across Frisco, Prosper, Celina, and surrounding North DFW communities. The company also says it serves clients throughout Texas.
+            Design for renovations is done in house. Larger design work is coordinated with landscape architects. This is not a standalone architecture practice.
+          </p>
+          <p>
+            Regular routes named by the company include Frisco, Prosper, and Celina, plus nearby North Texas communities. The company site also says it serves clients throughout Texas. Confirm your address when you enquire.
+          </p>
+          <p>
+            <Link href="/contact#estimate" className="text-ink underline underline-offset-4">Request a Quote</Link>
+            {" or call "}
+            <a className="text-ink underline underline-offset-4" href={business.phoneHref}>{business.phone}</a>.
           </p>
         </div>
         <aside className="border border-line bg-white p-5 text-sm leading-6">

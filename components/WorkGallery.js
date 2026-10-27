@@ -92,7 +92,7 @@ export function WorkGallery() {
               ))}
             </ul>
             <p className="mt-4 text-xs leading-5 text-mute">
-              North Dallas–Fort Worth. A city or client name is shown only when it was recorded with the photograph.
+              North Texas. A city or client name is shown only when it was recorded with the photograph.
             </p>
             <Link
               href={`/contact?service=${encodeURIComponent(active.badge)}#estimate`}

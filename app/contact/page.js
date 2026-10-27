@@ -13,9 +13,9 @@ export default function ContactPage() {
     <main className="mx-auto grid max-w-page gap-10 px-5 py-12 lg:grid-cols-[0.8fr_1.2fr]">
       <div>
         <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">Estimate</p>
-        <h1 className="mt-3 font-serif text-5xl leading-none">Tell us about the property.</h1>
+        <h1 className="mt-3 font-serif text-4xl leading-tight sm:text-5xl sm:leading-none">Request a Quote.</h1>
         <p className="mt-4 text-sm leading-6 text-mute">
-          Every property is evaluated individually to ensure an accurate, customized scope. A call is just as direct.
+          Three details are enough to start: where the property is, what kind of property it is, and the work you need. The office reads that during weekday hours. A call is just as direct.
         </p>
         <p className="mt-6 text-sm leading-7">
           <a href={business.phoneHref} className="text-lg underline underline-offset-4">{business.phone}</a><br />

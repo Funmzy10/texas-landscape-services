@@ -61,7 +61,7 @@ export function ServiceMap() {
   return (
     <figure className="border border-line bg-white">
       <svg viewBox="0 0 720 300" role="img" aria-labelledby="service-map-title service-map-desc" className="h-auto w-full">
-        <title id="service-map-title">Serving North Dallas–Fort Worth</title>
+        <title id="service-map-title">Service area around Pilot Point</title>
         <desc id="service-map-desc">
           The Pilot Point yard is marked separately from city centers in Frisco, Plano, McKinney, Denton, Prosper, Little Elm, and Celina. Those cities are service areas, not branch offices.
         </desc>

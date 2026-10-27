@@ -79,7 +79,7 @@ export function Estimator() {
           services: form.services.join(", "),
           place: form.place,
           notes: form.notes,
-          _subject: "Estimate request — Texas Landscape Services",
+          _subject: "Estimate request, Texas Landscape Services",
           _template: "table",
           _captcha: "false",
         }),
@@ -171,7 +171,7 @@ export function Estimator() {
             Email
             <input type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
           </label>
-          <p className="text-xs leading-5 text-mute">Phone or email — include at least one.</p>
+          <p className="text-xs leading-5 text-mute">Include a phone number or an email. One is enough.</p>
           <label className="text-sm">
             City, ZIP, or property address
             <input required value={form.place} onChange={(event) => setForm({ ...form, place: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
@@ -203,7 +203,7 @@ export function Estimator() {
           </button>
         ) : (
           <button type="submit" disabled={status === "sending"} className="h-12 bg-moss px-5 text-sm text-paper disabled:opacity-60">
-            {status === "sending" ? "Sending…" : "Send the request"}
+            {status === "sending" ? "Sending…" : "Request a Quote"}
           </button>
         )}
       </div>

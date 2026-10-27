@@ -15,7 +15,7 @@ export default function ServicesPage() {
       <h1 className="mt-3 max-w-2xl font-serif text-4xl leading-none sm:text-5xl">Care matched to the property.</h1>
       <div className="mt-8 grid gap-8">
         {services.map((service) => (
-          <article key={service.slug} className="grid grid-cols-[7.25rem_1fr] items-start gap-4 border-t border-line pt-5 sm:grid-cols-[11rem_1fr] md:grid-cols-[15rem_1fr] md:items-center md:pt-6">
+          <article key={service.slug} className="grid grid-cols-[7.25rem_minmax(0,1fr)] items-start gap-4 border-t border-line pt-5 sm:grid-cols-[11rem_minmax(0,1fr)] md:grid-cols-[15rem_minmax(0,1fr)] md:items-center md:pt-6">
             <div className="relative aspect-[4/3]">
               <Image src={service.image} alt={service.alt} fill className="object-cover object-center" sizes="(min-width: 768px) 240px, 176px" />
             </div>
@@ -26,9 +26,14 @@ export default function ServicesPage() {
                 <span className="text-brass">For </span>
                 {service.who}
               </p>
-              <Link href={`/services/${service.slug}`} className="mt-4 inline-flex h-11 items-center border border-ink/20 px-4 text-sm">
-                Service details
-              </Link>
+              <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                <Link href={`/contact?service=${encodeURIComponent(service.title)}#estimate`} data-cta="services-quote" className="inline-flex h-11 w-full items-center justify-center bg-moss px-4 text-sm text-paper sm:w-auto">
+                  Request a Quote
+                </Link>
+                <Link href={`/services/${service.slug}`} className="inline-flex h-11 w-full items-center justify-center border border-ink/20 px-4 text-sm sm:w-auto">
+                  What is included
+                </Link>
+              </div>
             </div>
           </article>
         ))}

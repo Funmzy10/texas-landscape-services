@@ -141,7 +141,7 @@ export function SiteShell({ children }) {
           href="/contact#estimate"
           className="flex h-14 items-center justify-center bg-brass text-sm text-paper"
         >
-          Get an estimate
+          Request a Quote
         </Link>
       </div>
     </>

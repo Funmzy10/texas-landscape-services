@@ -30,7 +30,7 @@ export async function POST(request) {
     services,
     place,
     notes,
-    _subject: "Estimate request — Texas Landscape Services",
+    _subject: "Estimate request, Texas Landscape Services",
     _template: "table",
     _captcha: "false",
   };

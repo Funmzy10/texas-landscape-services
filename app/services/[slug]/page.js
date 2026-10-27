@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { services } from "@/lib/data";
+import { business, services } from "@/lib/data";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -36,9 +36,12 @@ export default async function ServicePage({ params }) {
             <span className="text-brass">Suitable for </span>
             {service.who}
           </p>
-          <Link href={`/contact?service=${encodeURIComponent(service.title)}#estimate`} className="mt-6 inline-flex h-12 w-fit items-center bg-moss px-5 text-sm text-paper">
-            Request a quote
+          <Link href={`/contact?service=${encodeURIComponent(service.title)}#estimate`} data-cta="service-page-quote" className="mt-6 inline-flex h-12 w-fit items-center bg-moss px-5 text-sm text-paper">
+            Request a Quote
           </Link>
+          <p className="mt-3 text-sm text-mute">
+            Or call <a className="text-ink underline underline-offset-4" href={business.phoneHref}>{business.phone}</a>.
+          </p>
         </div>
       </section>
       <section className="mx-auto max-w-page px-5 pb-12">

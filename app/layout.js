@@ -9,7 +9,7 @@ const sans = Outfit({ subsets: ["latin"], weight: ["400", "500", "600"], variabl
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Texas Landscape Services | North Dallas–Fort Worth",
+    default: "Texas Landscape Services | Pilot Point",
     template: "%s · Texas Landscape Services",
   },
   description:
@@ -17,7 +17,7 @@ export const metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     title: "Texas Landscape Services",
-    description: "Commercial grounds and private estate landscape management across North Dallas–Fort Worth.",
+    description: "Commercial grounds and private estate care from the Pilot Point yard.",
     url: siteUrl,
     images: [{ url: "/media/commercial-turf.jpg", width: 1500, height: 1263, alt: "A wide mowed lawn in front of a retail center with a brick monument sign." }],
     type: "website",
