@@ -18,8 +18,8 @@ export default function ContactPage() {
           Every property is evaluated individually to ensure an accurate, customized scope. A call is just as direct.
         </p>
         <p className="mt-6 text-sm leading-7">
-          <a href={business.phoneHref} className="text-lg">{business.phone}</a><br />
-          <a href={business.emailHref}>{business.email}</a><br />
+          <a href={business.phoneHref} className="text-lg underline underline-offset-4">{business.phone}</a><br />
+          <a href={business.emailHref} className="underline underline-offset-4">{business.email}</a><br />
           <span className="text-mute">{business.hours}</span>
         </p>
         <p className="mt-4 text-sm text-mute">

@@ -22,7 +22,7 @@ export function WorkGallery() {
 
   return (
     <>
-      <div className="flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Project types">
+      <div className="flex w-full max-w-full gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Project types">
         {filters.map((item) => (
           <button
             key={item.id}

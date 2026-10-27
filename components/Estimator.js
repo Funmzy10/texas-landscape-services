@@ -50,8 +50,12 @@ export function Estimator() {
   async function submit(event) {
     event.preventDefault();
     setError("");
-    if (!form.name.trim() || !form.phone.trim() || !form.place.trim()) {
-      setError("Name, phone, and city or address are required.");
+    if (!form.name.trim() || !form.place.trim()) {
+      setError("Name and a city, ZIP, or address are required.");
+      return;
+    }
+    if (!form.phone.trim() && !form.email.trim()) {
+      setError("Add a phone number or an email so the office can reply.");
       return;
     }
     if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
@@ -66,7 +70,7 @@ export function Estimator() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           name: form.name,
-          phone: form.phone,
+          phone: form.phone || "not provided",
           email: form.email || "not provided",
           property: form.property,
           services: form.services.join(", "),
@@ -156,12 +160,13 @@ export function Estimator() {
           </label>
           <label className="text-sm">
             Phone
-            <input required inputMode="tel" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
+            <input inputMode="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
           </label>
           <label className="text-sm">
-            Email <span className="text-mute">(optional)</span>
-            <input type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
+            Email
+            <input type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
           </label>
+          <p className="text-xs leading-5 text-mute">Phone or email — include at least one.</p>
           <label className="text-sm">
             City, ZIP, or property address
             <input required value={form.place} onChange={(event) => setForm({ ...form, place: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />

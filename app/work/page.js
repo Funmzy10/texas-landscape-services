@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function WorkPage() {
   return (
-    <main className="mx-auto max-w-page px-5 py-12 md:py-16">
+    <main className="mx-auto max-w-page overflow-x-clip px-5 py-12 md:py-16">
       <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">Portfolio</p>
       <h1 className="mt-3 max-w-2xl font-serif text-5xl leading-[0.95]">The grounds, as photographed.</h1>
       <p className="mt-4 max-w-xl text-sm leading-6 text-mute">
@@ -26,7 +26,7 @@ export default function WorkPage() {
         </Link>
       </div>
       <p className="mt-4 text-sm text-mute">
-        Or call <a href={business.phoneHref}>{business.phone}</a>
+        Or call <a className="underline underline-offset-4" href={business.phoneHref}>{business.phone}</a>
       </p>
     </main>
   );

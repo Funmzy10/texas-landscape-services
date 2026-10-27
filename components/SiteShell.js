@@ -39,7 +39,7 @@ export function SiteShell({ children }) {
         Skip to content
       </a>
       <header className="sticky top-0 z-40 border-b border-line bg-paper">
-        <div className="mx-auto flex h-[72px] max-w-page items-center justify-between gap-4 px-5">
+        <div className="mx-auto flex h-16 max-w-page items-center justify-between gap-3 px-4 sm:h-[72px] sm:px-5">
           <Link href="/" className="flex items-center gap-3 leading-none text-ink">
             <svg viewBox="0 0 36 36" className="h-9 w-9 shrink-0" aria-hidden="true">
               <rect x="0.75" y="0.75" width="34.5" height="34.5" fill="none" stroke="currentColor" strokeWidth="1" />
@@ -47,7 +47,7 @@ export function SiteShell({ children }) {
               <path d="M6 28h24" fill="none" stroke="currentColor" strokeWidth="1.25" />
             </svg>
             <span>
-              <span className="block font-serif text-[1.05rem] tracking-tight sm:text-[1.2rem]">Texas Landscape</span>
+              <span className="block max-w-[8.6rem] font-serif text-[0.98rem] leading-none tracking-tight sm:max-w-none sm:text-[1.2rem]">Texas Landscape</span>
               <span className="mt-1 block text-[0.62rem] uppercase tracking-[0.28em] text-mute">Services</span>
             </span>
           </Link>
@@ -112,11 +112,11 @@ export function SiteShell({ children }) {
           <div className="text-sm leading-6">
             <p className="text-[0.68rem] uppercase tracking-[0.18em] text-paper/60">Office</p>
             <p className="mt-3">
-              <a href={business.phoneHref} className="underline-offset-4 hover:underline">
+              <a href={business.phoneHref} className="underline underline-offset-4">
                 {business.phone}
               </a>
               <br />
-              <a href={business.emailHref} className="underline-offset-4 hover:underline">
+              <a href={business.emailHref} className="underline underline-offset-4">
                 {business.email}
               </a>
             </p>
@@ -126,8 +126,8 @@ export function SiteShell({ children }) {
         <div className="mx-auto flex max-w-page flex-wrap justify-between gap-3 border-t border-white/10 px-5 py-4 text-xs text-paper/60">
           <span>© {new Date().getFullYear()} Texas Landscape Services</span>
           <span className="flex gap-4">
-            <Link href="/privacy">Privacy</Link>
-            <a href={business.existingSite}>Company site</a>
+            <Link href="/privacy" className="underline underline-offset-4">Privacy</Link>
+            <a href={business.existingSite} className="underline underline-offset-4">Company site</a>
           </span>
         </div>
       </footer>

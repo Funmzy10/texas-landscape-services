@@ -6,10 +6,9 @@ import { reviews, business, projects, services } from "@/lib/data";
 const featuredSlugs = ["estate-entry", "color-bed", "commercial-turf", "stone-terrace"];
 
 const steps = [
-  ["01", "Tell us about your property", "Share the location, the kind of property, the service you need, and any details that matter on the site."],
-  ["02", "Review the property", "The office reviews what you sent and decides what further look at the grounds is needed."],
-  ["03", "Agree on the scope", "The work, and the pricing that applies, are agreed before the job begins."],
-  ["04", "Schedule the work", "Once that is agreed, the work is scheduled. Timing follows the property and the company’s calendar."],
+  ["01", "Tell us about your property", "Share the location, the kind of property, and the landscaping you need."],
+  ["02", "Review the property", "The company reviews those details and decides what further look at the grounds is needed."],
+  ["03", "Agree on the scope", "The proposed work, and any ongoing care, are agreed before the job begins."],
 ];
 
 export default function HomePage() {
@@ -43,7 +42,7 @@ export default function HomePage() {
             </a>
           </p>
         </div>
-        <div className="relative h-[340px] sm:h-[400px] lg:h-[min(62vh,560px)]">
+        <div className="relative h-[320px] sm:h-[380px] lg:h-[min(58vh,560px)]">
           <Image
             src="/media/estate-gate.jpg"
             alt="Yellow and cream flowers in a bed in front of a black iron fence and a stone estate entrance."
@@ -78,7 +77,7 @@ export default function HomePage() {
             <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">Selected work</p>
             <h2 className="mt-2 max-w-xl font-serif text-3xl leading-tight sm:text-4xl">Estates, color, and commercial turf.</h2>
           </div>
-          <Link href="/work" className="text-sm underline-offset-4 hover:underline">
+          <Link href="/work" className="text-sm underline underline-offset-4">
             All projects
           </Link>
         </div>
@@ -119,6 +118,7 @@ export default function HomePage() {
                 <Link href={`/services/${service.slug}`} className="grid gap-1 py-3.5 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] sm:items-baseline sm:gap-6">
                   <strong className="font-serif text-xl font-medium sm:text-2xl">{service.title}</strong>
                   <span className="text-sm leading-6 text-mute">{service.summary}</span>
+                  <span className="text-sm underline underline-offset-4 sm:col-start-2">Service details</span>
                 </Link>
               </li>
             ))}
@@ -128,8 +128,8 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-page px-5 py-10 md:py-12">
         <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">How a project moves</p>
-        <h2 className="mt-2 max-w-2xl font-serif text-3xl leading-tight sm:text-4xl">Your Project, From Enquiry to Completion</h2>
-        <ol className="mt-8 grid gap-8 md:grid-cols-4 md:gap-6">
+        <h2 className="mt-2 max-w-2xl font-serif text-3xl leading-tight sm:text-4xl">From enquiry to an agreed scope</h2>
+        <ol className="mt-8 grid gap-8 md:grid-cols-3 md:gap-8">
           {steps.map(([number, title, copy], index) => (
             <li key={number} className="relative grid grid-cols-[2rem_1fr] gap-x-4 md:block">
               {index < steps.length - 1 ? (
@@ -148,6 +148,9 @@ export default function HomePage() {
             </li>
           ))}
         </ol>
+        <Link href="/contact#estimate" className="mt-8 inline-flex h-12 items-center bg-moss px-5 text-sm text-paper">
+          Tell us about the property
+        </Link>
       </section>
 
       <section className="border-y border-line bg-white">
@@ -162,7 +165,7 @@ export default function HomePage() {
                 Taken from the Pilot Point Yelp profile. One of the five, Jeff R. in June 2023, says a large project was left unfinished.
               </p>
             </div>
-            <a href={business.yelp} className="text-sm underline-offset-4 hover:underline">
+            <a href={business.yelp} className="text-sm underline underline-offset-4">
               Read the Yelp profile
             </a>
           </div>

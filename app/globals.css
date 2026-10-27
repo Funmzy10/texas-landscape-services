@@ -12,6 +12,7 @@ html {
 
 body {
   @apply bg-paper text-ink font-sans antialiased;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -19,8 +20,14 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #8a6840;
+  outline: 2px solid #74502c;
   outline-offset: 3px;
+}
+
+p a:not([class*="inline-flex"]),
+figcaption a:not([class*="inline-flex"]) {
+  text-decoration-line: underline;
+  text-underline-offset: 0.18em;
 }
 
 @media (prefers-reduced-motion: reduce) {

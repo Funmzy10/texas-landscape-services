@@ -97,7 +97,7 @@ export function ServiceMap() {
       </svg>
       <figcaption className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-4 py-3 text-xs leading-5 text-mute">
         <span>Yard pin is 10841 FM 1385. Other pins are city centers, not offices.</span>
-        <a href={business.directions} className="text-ink underline-offset-4 hover:underline">
+        <a href={business.directions} className="text-ink underline underline-offset-4">
           Directions to the yard
         </a>
       </figcaption>

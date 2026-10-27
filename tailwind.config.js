@@ -8,7 +8,7 @@ module.exports = {
         ink: "#162019",
         moss: "#1b3126",
         moss2: "#274536",
-        brass: "#8a6840",
+        brass: "#74502c",
         line: "#e4ddd1",
         mute: "#5d675f",
       },

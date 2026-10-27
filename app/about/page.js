@@ -27,7 +27,7 @@ export default function AboutPage() {
           <p className="text-[0.68rem] uppercase tracking-[0.16em] text-brass">On the record</p>
           <p className="mt-3">{business.street}<br />{business.city}, {business.region} {business.postal}</p>
           <p className="mt-2 text-mute">{business.mail}</p>
-          <p className="mt-3"><a href={business.phoneHref}>{business.phone}</a><br /><a href={business.emailHref}>{business.email}</a></p>
+          <p className="mt-3"><a className="underline underline-offset-4" href={business.phoneHref}>{business.phone}</a><br /><a className="underline underline-offset-4" href={business.emailHref}>{business.email}</a></p>
           <p className="mt-3 text-mute">{business.hours}</p>
           <p className="mt-4 text-mute">Yelp shows {business.yelpScore} from {business.yelpCount} reviews for this Pilot Point listing. Yelp also marks the profile “Commercial only”; the company’s own site lists residential and estate work as well. License numbers and insurance certificates are not published here.</p>
         </aside>
