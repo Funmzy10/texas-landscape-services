@@ -61,22 +61,34 @@ export function Estimator() {
     if (form.company) return;
     setStatus("sending");
     try {
-      const response = await fetch("/api/estimate", {
+      const response = await fetch("https://formsubmit.co/ajax/info@txlandscapeservices.com", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           name: form.name,
           phone: form.phone,
-          email: form.email,
+          email: form.email || "not provided",
           property: form.property,
           services: form.services.join(", "),
           place: form.place,
           notes: form.notes,
-          company: form.company,
+          _subject: "Estimate request — Texas Landscape Services",
+          _template: "table",
+          _captcha: "false",
         }),
       });
       const data = await response.json().catch(() => ({}));
-      if (!response.ok || !data.ok) {
+      const accepted = response.ok && (data.success === true || data.success === "true");
+      if (!accepted) {
+        setStatus("error");
+        const message = String(data.message || "");
+        setError(
+          message.toLowerCase().includes("activation")
+            ? "FormSubmit emailed info@txlandscapeservices.com an activation link. The office has to open that email once before requests are delivered. Until then, call (469) 455-9733."
+            : "The note did not send. Call (469) 455-9733 or email info@txlandscapeservices.com.",
+        );
+        return;
+      }
         setStatus("error");
         setError("The note did not send. Call (469) 455-9733 or email info@txlandscapeservices.com.");
         return;
