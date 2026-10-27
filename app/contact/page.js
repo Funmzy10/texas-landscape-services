@@ -15,11 +15,11 @@ export default function ContactPage() {
         <p className="text-[0.72rem] uppercase tracking-[0.18em] text-brass">Estimate</p>
         <h1 className="mt-3 font-serif text-4xl leading-tight sm:text-5xl sm:leading-none">Request a Quote.</h1>
         <p className="mt-4 text-sm leading-6 text-mute">
-          Three details are enough to start: where the property is, what kind of property it is, and the work you need. The office reads that during weekday hours. A call is just as direct.
+          One page. Your name, a phone or email, where the property is, what kind of property it is, and the work you need. The office reads it on weekdays. A call is just as direct.
         </p>
         <p className="mt-6 text-sm leading-7">
-          <a href={business.phoneHref} className="text-lg underline underline-offset-4">{business.phone}</a><br />
-          <a href={business.emailHref} className="underline underline-offset-4">{business.email}</a><br />
+          <a href={business.phoneHref} data-cta="phone" className="text-lg underline underline-offset-4">{business.phone}</a><br />
+          <a href={business.emailHref} data-cta="email" className="underline underline-offset-4">{business.email}</a><br />
           <span className="text-mute">{business.hours}</span>
         </p>
         <p className="mt-4 text-sm text-mute">

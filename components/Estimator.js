@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { business, estimateServices, propertyTypes } from "@/lib/data";
 
@@ -15,16 +15,30 @@ const empty = {
   company: "",
 };
 
+const presetService = {
+  "Commercial landscape management": "Full grounds maintenance",
+  "Estate and residential grounds": "Full grounds maintenance",
+  "Design, build, and renovation": "Landscape renovation",
+  "Maintenance programs": "Full grounds maintenance",
+  "Irrigation and water management": "Irrigation & water management",
+  "Pressure washing": "Pressure washing",
+  "Commercial grounds": "Full grounds maintenance",
+  "Private estates": "Full grounds maintenance",
+  "Turf & lawn care": "Full grounds maintenance",
+};
+
 export function Estimator() {
   const params = useSearchParams();
   const preset = params.get("service") || "";
-  const [step, setStep] = useState(preset ? 2 : 0);
-  const [form, setForm] = useState({ ...empty, notes: preset ? `Interested in similar work: ${preset}` : "" });
+  const matched = presetService[preset] || "";
+  const [form, setForm] = useState({
+    ...empty,
+    services: matched ? [matched] : [],
+    notes: preset ? `Asking about: ${preset}` : "",
+  });
   const [error, setError] = useState("");
   const [status, setStatus] = useState("idle");
   const lock = useRef(false);
-
-  const progress = useMemo(() => ["Property", "Services", "Details"][step], [step]);
 
   function toggleService(name) {
     setForm((current) => ({
@@ -35,36 +49,24 @@ export function Estimator() {
     }));
   }
 
-  function nextFrom(index) {
-    setError("");
-    if (index === 0 && !form.property) {
-      setError("Choose the kind of property.");
-      return;
-    }
-    if (index === 1 && form.services.length === 0) {
-      setError("Choose at least one service.");
-      return;
-    }
-    setStep(index + 1);
-  }
-
   async function submit(event) {
     event.preventDefault();
     setError("");
-    if (!form.name.trim() || !form.place.trim()) {
-      setError("Name and a city, ZIP, or address are required.");
-      return;
-    }
-    if (!form.phone.trim() && !form.email.trim()) {
-      setError("Add a phone number or an email so the office can reply.");
+    const missing = [];
+    if (!form.name.trim()) missing.push("your name");
+    if (!form.place.trim()) missing.push("a city, ZIP, or address");
+    if (!form.phone.trim() && !form.email.trim()) missing.push("a phone number or an email");
+    if (!form.property) missing.push("the property type");
+    if (form.services.length === 0) missing.push("at least one service");
+    if (missing.length) {
+      setError(`Add ${missing.join(", ")}.`);
       return;
     }
     if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       setError("That email address does not look complete.");
       return;
     }
-    if (form.company) return;
-    if (lock.current) return;
+    if (form.company || lock.current) return;
     lock.current = true;
     setStatus("sending");
     try {
@@ -117,37 +119,45 @@ export function Estimator() {
   }
 
   return (
-    <form onSubmit={submit} className="border border-line bg-white p-5 sm:p-7" noValidate>
-      <p className="text-[0.68rem] uppercase tracking-[0.18em] text-brass">
-        Step {step + 1} of 3 · {progress}
-      </p>
-      {step === 0 ? (
-        <fieldset className="mt-5">
-          <legend className="font-serif text-2xl">What kind of property?</legend>
-          <div className="mt-4 grid gap-2 sm:grid-cols-2">
+    <form onSubmit={submit} className="border border-line bg-white p-5 sm:p-7" noValidate data-form="quote">
+      <p className="font-serif text-2xl">Tell us about the property.</p>
+      <p className="mt-2 text-sm leading-6 text-mute">The office needs this much to start. Nothing else.</p>
+      <div className="mt-5 grid gap-3">
+        <label className="text-sm">
+          Name
+          <input required autoComplete="name" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} className="mt-1 h-12 w-full border border-line bg-paper px-3 text-base" />
+        </label>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <label className="text-sm">
+            Phone
+            <input inputMode="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} className="mt-1 h-12 w-full border border-line bg-paper px-3 text-base" />
+          </label>
+          <label className="text-sm">
+            Email
+            <input type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="mt-1 h-12 w-full border border-line bg-paper px-3 text-base" />
+          </label>
+        </div>
+        <p id="contact-either" className="text-xs leading-5 text-mute">Include a phone number or an email. One is enough.</p>
+        <label className="text-sm">
+          City, ZIP, or property address
+          <input required autoComplete="street-address" value={form.place} onChange={(event) => setForm({ ...form, place: event.target.value })} className="mt-1 h-12 w-full border border-line bg-paper px-3 text-base" />
+        </label>
+        <label className="text-sm">
+          Property type
+          <select value={form.property} onChange={(event) => setForm({ ...form, property: event.target.value })} className="mt-1 h-12 w-full border border-line bg-paper px-3 text-base">
+            <option value="">Choose one</option>
             {propertyTypes.map((item) => (
-              <label key={item} className={`cursor-pointer border px-4 py-3 text-sm ${form.property === item ? "border-moss bg-moss text-paper" : "border-line"}`}>
-                <input
-                  className="sr-only"
-                  type="radio"
-                  name="property"
-                  checked={form.property === item}
-                  onChange={() => setForm({ ...form, property: item })}
-                />
-                {item}
-              </label>
+              <option key={item}>{item}</option>
             ))}
-          </div>
-        </fieldset>
-      ) : null}
-      {step === 1 ? (
-        <fieldset className="mt-5">
-          <legend className="font-serif text-2xl">What do you need?</legend>
-          <div className="mt-4 grid gap-2">
+          </select>
+        </label>
+        <fieldset>
+          <legend className="text-sm">Service needed</legend>
+          <div className="mt-2 grid gap-2 sm:grid-cols-2">
             {estimateServices.map((item) => {
               const on = form.services.includes(item);
               return (
-                <label key={item} className={`cursor-pointer border px-4 py-3 text-sm ${on ? "border-moss bg-moss text-paper" : "border-line"}`}>
+                <label key={item} className={`flex cursor-pointer items-center gap-2 border px-3 py-3 text-sm ${on ? "border-moss bg-moss text-paper" : "border-line"}`}>
                   <input className="sr-only" type="checkbox" checked={on} onChange={() => toggleService(item)} />
                   {item}
                 </label>
@@ -155,58 +165,23 @@ export function Estimator() {
             })}
           </div>
         </fieldset>
-      ) : null}
-      {step === 2 ? (
-        <div className="mt-5 grid gap-3">
-          <p className="font-serif text-2xl">How should the office reach you?</p>
-          <label className="text-sm">
-            Name
-            <input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
-          </label>
-          <label className="text-sm">
-            Phone
-            <input inputMode="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
-          </label>
-          <label className="text-sm">
-            Email
-            <input type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
-          </label>
-          <p className="text-xs leading-5 text-mute">Include a phone number or an email. One is enough.</p>
-          <label className="text-sm">
-            City, ZIP, or property address
-            <input required value={form.place} onChange={(event) => setForm({ ...form, place: event.target.value })} className="mt-1 h-11 w-full border border-line bg-paper px-3" />
-          </label>
-          <label className="text-sm">
-            Project notes <span className="text-mute">(optional)</span>
-            <textarea rows={4} value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} className="mt-1 w-full border border-line bg-paper px-3 py-2" />
-          </label>
-          <label className="absolute -left-[9999px]" aria-hidden>
-            Company
-            <input tabIndex={-1} autoComplete="off" value={form.company} onChange={(event) => setForm({ ...form, company: event.target.value })} />
-          </label>
-        </div>
-      ) : null}
+        <label className="text-sm">
+          Project notes <span className="text-mute">(optional)</span>
+          <textarea rows={3} value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} className="mt-1 w-full border border-line bg-paper px-3 py-2 text-base" />
+        </label>
+        <label className="absolute -left-[9999px]" aria-hidden>
+          Company
+          <input tabIndex={-1} autoComplete="off" value={form.company} onChange={(event) => setForm({ ...form, company: event.target.value })} />
+        </label>
+      </div>
       {error ? (
         <p role="alert" className="mt-4 text-sm text-red-800">
           {error}
         </p>
       ) : null}
-      <div className="mt-6 flex gap-3">
-        {step > 0 ? (
-          <button type="button" onClick={() => setStep(step - 1)} className="h-12 border border-ink/20 px-5 text-sm">
-            Back
-          </button>
-        ) : null}
-        {step < 2 ? (
-          <button type="button" onClick={() => nextFrom(step)} className="h-12 bg-moss px-5 text-sm text-paper">
-            Continue
-          </button>
-        ) : (
-          <button type="submit" disabled={status === "sending"} className="h-12 bg-moss px-5 text-sm text-paper disabled:opacity-60">
-            {status === "sending" ? "Sending…" : "Request a Quote"}
-          </button>
-        )}
-      </div>
+      <button type="submit" data-cta="form-submit" disabled={status === "sending"} className="mt-6 h-12 bg-moss px-5 text-sm text-paper disabled:opacity-60">
+        {status === "sending" ? "Sending…" : "Request a Quote"}
+      </button>
     </form>
   );
 }

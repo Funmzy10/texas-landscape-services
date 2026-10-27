@@ -21,7 +21,7 @@ export default function HomePage() {
         <div>
           <p className="text-[0.72rem] uppercase tracking-[0.2em] text-brass">Pilot Point · commercial grounds and private estates</p>
           <h1 className="mt-3 max-w-md font-serif text-4xl leading-[0.98] tracking-tight sm:text-5xl">
-            Grounds kept to the standard of the property.
+            Landscape care for commercial grounds and private estates.
           </h1>
           <p className="mt-4 max-w-md text-base leading-7 text-mute">
             Maintenance, seasonal color, renovation, irrigation, and pressure washing for offices, associations, and private homes in Frisco, Plano, McKinney, Denton, Prosper, Little Elm, Celina, and nearby.
@@ -218,9 +218,6 @@ export default function HomePage() {
             <li key={city}>{city}</li>
           ))}
         </ul>
-        <Link href="/contact#estimate" data-cta="area-quote" className="mt-5 inline-flex h-12 items-center bg-moss px-5 text-sm text-paper">
-          Request a Quote
-        </Link>
       </section>
 
       <section className="bg-moss text-paper">
