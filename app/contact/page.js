@@ -4,7 +4,7 @@ import { business } from "@/lib/data";
 
 export const metadata = {
   title: "Request a quote",
-  description: "Ask Texas Landscape Services for an estimate. Call (469) 455-9733 or send the property details.",
+  description: "Ask Texas Landscape Services for an estimate. Call +1 (469) 455-9733 or send the property details.",
   alternates: { canonical: "/contact" },
 };
 

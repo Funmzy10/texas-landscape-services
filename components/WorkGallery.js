@@ -38,30 +38,20 @@ export function WorkGallery() {
           </button>
         ))}
       </div>
-      <div className="mt-8 flex flex-col">
+      <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 xl:grid-cols-3">
         {shown.map((project) => (
-          <button
-            key={project.slug}
-            type="button"
-            onClick={() => setActive(project)}
-            className="group border-t border-line py-8 text-left first:border-t-0 first:pt-0"
-          >
-            <span className="relative left-1/2 block aspect-[3/4] w-screen -translate-x-1/2 overflow-hidden bg-moss sm:aspect-[16/10] sm:max-h-[88vh]">
+          <button key={project.slug} type="button" onClick={() => setActive(project)} className="group text-left">
+            <span className="relative block aspect-[4/3] overflow-hidden bg-moss">
               <Image
                 src={project.image}
                 alt={project.alt}
                 fill
-                sizes="100vw"
+                sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="object-cover transition duration-700 group-hover:scale-[1.02]"
               />
             </span>
-            <span className="mt-4 flex items-end justify-between gap-4">
-              <span>
-                <span className="block text-[0.68rem] uppercase tracking-[0.16em] text-brass">{project.badge}</span>
-                <span className="mt-1 block font-serif text-3xl leading-tight sm:text-4xl">{project.title}</span>
-              </span>
-              <span className="pb-1 text-xs uppercase tracking-[0.14em] text-mute">View</span>
-            </span>
+            <span className="mt-3 block text-[0.68rem] uppercase tracking-[0.16em] text-brass">{project.badge}</span>
+            <span className="mt-1 block font-serif text-2xl leading-tight">{project.title}</span>
           </button>
         ))}
       </div>
@@ -83,7 +73,7 @@ export function WorkGallery() {
             <h2 id="project-title" className="mt-4 font-serif text-3xl leading-tight">
               {active.title}
             </h2>
-            <div className="relative mt-5 aspect-[4/5]">
+            <div className="relative mt-5 aspect-[4/3]">
               <Image src={active.image} alt={active.alt} fill className="object-cover" sizes="400px" />
             </div>
             <p className="mt-5 text-sm leading-6 text-mute">{active.overview}</p>

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { estimateServices, propertyTypes } from "@/lib/data";
+import { business, estimateServices, propertyTypes } from "@/lib/data";
 
 const empty = {
   property: "",
@@ -84,15 +84,15 @@ export function Estimator() {
         const message = String(data.message || "");
         setError(
           message.toLowerCase().includes("activation")
-            ? "FormSubmit emailed info@txlandscapeservices.com an activation link. The office has to open that email once before requests are delivered. Until then, call (469) 455-9733."
-            : "The note did not send. Call (469) 455-9733 or email info@txlandscapeservices.com.",
+            ? `FormSubmit emailed ${business.email} an activation link. The office has to open that email once before requests are delivered. Until then, call ${business.phone}.`
+            : `The note did not send. Call ${business.phone} or email ${business.email}.`,
         );
         return;
       }
       setStatus("sent");
     } catch {
       setStatus("error");
-      setError("The note did not send. Call (469) 455-9733 or email info@txlandscapeservices.com.");
+      setError(`The note did not send. Call ${business.phone} or email ${business.email}.`);
     }
   }
 
@@ -101,7 +101,7 @@ export function Estimator() {
       <div className="border border-line bg-white p-6">
         <p className="font-serif text-3xl">Request received.</p>
         <p className="mt-3 text-sm leading-6 text-mute">
-          FormSubmit accepted this request for info@txlandscapeservices.com. If you need a person now, call (469) 455-9733.
+          FormSubmit accepted this request for {business.email}. If you need a person now, call {business.phone}.
         </p>
       </div>
     );

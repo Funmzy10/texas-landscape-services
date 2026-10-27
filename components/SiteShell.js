@@ -65,7 +65,7 @@ export function SiteShell({ children }) {
           <div className="flex items-center gap-2">
             <a
               href={business.phoneHref}
-              className="inline-flex h-11 items-center gap-2 bg-moss px-4 text-sm text-paper hover:bg-moss2"
+              className="inline-flex h-11 items-center gap-2 bg-moss px-3 text-sm text-paper hover:bg-moss2 sm:px-4"
             >
               <Phone size={16} aria-hidden />
               <span className="hidden sm:inline">{business.phone}</span>
@@ -132,9 +132,9 @@ export function SiteShell({ children }) {
         </div>
       </footer>
       <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-white/10 bg-moss md:hidden">
-        <a href={business.phoneHref} className="flex h-14 items-center justify-center gap-2 text-sm text-paper">
+        <a href={business.phoneHref} className="flex h-14 items-center justify-center gap-2 px-2 text-[13px] text-paper">
           <Phone size={16} aria-hidden />
-          Tap to call
+          <span className="truncate">{business.phone}</span>
         </a>
         <Link
           href="/contact#estimate"
